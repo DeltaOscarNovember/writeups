@@ -2,7 +2,7 @@
 
 **Challenge:** Shells Bells CLI  
 **Level:** Intermediate  
-**Skills:** Linux system enumeration, Shell & process environment analysis, Git forensic recovery, cryptogrpahic file handling (OpenSSL, GPG), binary inspection (xxd, file), steganographic artifact detection, adversarial problem solving  
+**Skills:** Linux system enumeration, Shell & process environment analysis, Git forensic recovery, cryptographic file handling (OpenSSL, GPG), binary inspection (xxd, file), steganographic artifact detection, adversarial problem solving  
 **Platform:** TryHackMe
 
 ## Overview
