@@ -1,8 +1,8 @@
 ## Summary
 
-**Challenge:** Shells Bells CLI 
-**Level:** Intermediate
-**Skills:** Linux system enumeration, Shell & process environment analysis, Git forensic recovery, cryptogrpahic file handling (OpenSSL, GPG), binary inspection (xxd, file), steganographic artifact detection, adversarial problem solving 
+**Challenge:** Shells Bells CLI  
+**Level:** Intermediate  
+**Skills:** Linux system enumeration, Shell & process environment analysis, Git forensic recovery, cryptogrpahic file handling (OpenSSL, GPG), binary inspection (xxd, file), steganographic artifact detection, adversarial problem solving  
 **Platform:** TryHackMe
 
 ## Overview
@@ -17,24 +17,23 @@ Predictably, there were more difficult challenges hidden away for the curious an
 
 The narrative of the TryHackMe holiday challenges was centered around malicious bunnies attempting to turn the Christmas holidays into "Easter 2.0". One "rebel" bunny by the name of McSkidy had found evidence of this evil plot and left a series of clues behind in a compromised machine to help blue team save Christmas. 
 
-Within the Shells Bells challenge, McSkidy's clues can be combined into a secret key, and the hunter (i.e. you) must use your sleuthing and cyber skills to unravel the mystery of what he was trying to communicate via the files he hid in the system.
+Within the Shells Bells challenge, McSkidy's clues can be combined into a secret key, and the hunter (i.e. you) must use their sleuthing and cyber skills to unravel the mystery of what he was trying to communicate via the files he hid in the system.
 
 ## Writeup
 
 ### Known Information 
 
-Through the Beginner-level Shells Bells challenge, we already have sudo access to the compromised machine and have undone the work of the evil bunny plotters.
+Through the Beginner-level Shells Bells challenge, we already have `sudo` access to the compromised machine and have undone some of the work of the evil bunny plotters.
 
 The machine itself has several user accounts:
-- mcskidy
-- eddi_knapp
-- alice (or something, I don't quite remember)
+- `mcskidy`
+- `eddi_knapp`
+- `alice` (or something, I don't quite remember, irrelevant to this challenge)
 
 The user <code>mcskidy</code> has a <code>readme</code> sitting in their <code>Documents</code> folder. Let's open it up.
 
----
-
-From: mcskidy
+```bash
+From: mcskidy  
 To: whoever finds this
 
 I had a short second when no one was watching. I used it.
@@ -55,23 +54,19 @@ They combine to form the passcode to open my encrypted vault.
 
 Clues (one for each egg):
 
-1)
-I ride with your session, not with your chest of files.
+1) I ride with your session, not with your chest of files.
 Open the little bag your shell carries when you arrive.
 
-2)
-The tree shows today; the rings remember yesterday.
+2) The tree shows today; the rings remember yesterday.
 Read the ledger’s older pages.
 
-3)
-When pixels sleep, their tails sometimes whisper plain words.
+3) When pixels sleep, their tails sometimes whisper plain words.
 Listen to the tail.
 
 Find the fragments, join them in order, and use the resulting passcode
 to decrypt the message I left. Be careful — I had to be quick,
 and I left only enough to get help.
-
----
+```
 
 ### First Steps
 
@@ -107,7 +102,7 @@ Obviously, the scripts no longer existed, but this is still a big find.
 - There's at least one red herring somewhere! 
 - We'll be working with a few encrypted files
 
-Afer McSkidy's note was updated to point the user specifically to `/home/eddi_knapp/Documents`, that streamlined things considerably.
+A day after the challenge was released, McSkidy's note was updated to point the user specifically to `/home/eddi_knapp/Documents`. That streamlined things considerably.
 
 ### Flag 1
 
@@ -147,10 +142,10 @@ On to Flag 2!
 
 We found the note in the McSkidy's `Documents` folder, so let's check some of `eddi_knapp`'s other "main" folders:
 
-- Desktop: nothing of note
-- Pictures: a whole pile of different photos
-- Videos: empty (no hidden files either)
-- Downloads: a mysterious text file! What's it say?
+- `Desktop`: nothing of note
+- `Pictures`: a whole pile of different photos
+- `Videos`: empty (no hidden files either)
+- `Downloads`: a mysterious text file! What's it say?
 
 ```bash
 image download list:
@@ -160,7 +155,7 @@ image download list:
 - scenery_01.png
 ```
 
-Could this be a pointer to Hint 3?
+Could this be a pointer to Hint Number 3?
 
 TL:DR - no.
 
@@ -185,7 +180,7 @@ We now have two notes that are pointing us toward photos, ostensibly the long li
 
 So I headed back into `Pictures` to check those files out.
 
-I used variations on `xxd image.png | head -n 5` to confirm that the initial and final values for the images are all fine. 
+I used variations on `xxd image.png | head (and tail) -n 5` to confirm that the initial and final values for the images are all fine. 
 
 Hm. 
 
@@ -199,7 +194,7 @@ The first flag came from a single, correctly executed command, and unlike in oth
 
 Herring Lightbulb 3 - I could, feasibly, simply go up a few levels, run a combination xxd / grep search for anything flag-related, and "brute force" the key that way, but that also seems to contradict the "style" of this CTF.
 
-Remember - it'd be very odd if the designers of this challenge just made the flag findable by grep search. This is **InTeRmEdIaTE** after all, and it didn't work before.
+Remember - it'd be very odd if the designers of this challenge just made the flag findable by grep search. This is **InTeRmEdIaTE** after all, and that mentality didn't work before.
 
 Let's put a pin in the pictures for now and go up a level, back to home.
 
@@ -230,7 +225,7 @@ gpg: problem with the agent: Permission denied
 gpg: encrypted with 1 passphrase
 gpg: decryption failed: Bad session key
 ```
-Mwop mwop - we need the key. 
+Mwop mwop, but not unexpected - we need the key. 
 
 After quite a bit of chatting with ChatGPT and searching, I once again came to the conclusion that it'd be quite strange to have a genuine key that's easily searchable (by file format, for example).
 
@@ -313,18 +308,18 @@ Below is the list that should be live on the site. If you replace the contents o
 /home/socmas/2025/wishlist.txt with this exact list (one item per line, no numbering),
 the site will recognise it and the takeover glitching will stop. Do it — it will save the site.
 
-*(Redacted flag info)*
+(Redacted flag info)
 
 A final note — I don't know exactly where they have me, but there are *lots* of eggs and I can smell chocolate in the air. Something big is coming.  — McSkidy
 
 When the wishlist is corrected, the site will show a block of ciphertext. This ciphertext can be decrypted with the following unlock key:
 
-UNLOCK_KEY: *(redacted)*
+UNLOCK_KEY: (redacted)
 
 To decode the ciphertext, use OpenSSL. For instance, if you copied the ciphertext into a file /tmp/website_output.txt you could decode using the following command:
 
 cat > /tmp/website_output.txt
-openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -salt -base64 -in /tmp/website_output.txt -out /tmp/decoded_message.txt -pass pass:'*(redacted)*'
+openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -salt -base64 -in /tmp/website_output.txt -out /tmp/decoded_message.txt -pass pass:'(redacted)'
 cat /tmp/decoded_message.txt
 
 Sorry to be so convoluted, I couldn't risk making this easy while King Malhare watches. — McSkidy
@@ -333,7 +328,7 @@ Sorry to be so convoluted, I couldn't risk making this easy while King Malhare w
 This is now straight config, and it even comes with commands too! The newly restored Christmas website spat out yet another message:
 
 ```bash
-Well done — the glitch is fixed. Amazing job going the extra mile and saving the site. Take this flag: *(redacted)*
+Well done — the glitch is fixed. Amazing job going the extra mile and saving the site. Take this flag: (redacted)
 
 NEXT STEP:
 If you fancy something a little...spicier....use the FLAG you just obtained as the passphrase to unlock:
@@ -367,7 +362,7 @@ dir/sq1.png
 
 The PNG, when opened, revealed the final flag.
 
-[An edited picture of an Easter Egg with the CTF flag removed](../../assets/shells-bells/outro.png)
+![An edited picture of an Easter Egg with the CTF flag removed](../../assets/shells-bells/outro.png)
 
 That's all folks! As I wrote in my draft writeup:
 
