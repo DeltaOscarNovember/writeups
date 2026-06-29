@@ -1,0 +1,54 @@
+<svg width="680" height="480" viewBox="0 0 680 480" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+  <rect width="680" height="480" fill="#ffffff"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <text x="340" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">Drone side</text>
+
+  <rect x="30" y="46" width="620" height="160" rx="12" fill="none" stroke="#ddd" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="46" y="62" font-size="11" fill="#888">Camera unit</text>
+
+  <rect x="40" y="56" width="160" height="56" rx="8" fill="#f1efff" stroke="#534AB7" stroke-width="1"/>
+  <text x="120" y="78" text-anchor="middle" font-size="13" font-weight="bold" fill="#222">Image sensor</text>
+  <text x="120" y="97" text-anchor="middle" font-size="10" fill="#555">Captures raw frame</text>
+
+  <line x1="200" y1="84" x2="238" y2="84" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="240" y="56" width="200" height="56" rx="8" fill="#f1efff" stroke="#534AB7" stroke-width="1"/>
+  <text x="340" y="78" text-anchor="middle" font-size="13" font-weight="bold" fill="#222">Image signal processor</text>
+  <text x="340" y="97" text-anchor="middle" font-size="10" fill="#555">Debayer, denoise, colour</text>
+
+  <line x1="440" y1="84" x2="478" y2="84" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="480" y="56" width="160" height="56" rx="8" fill="#f1efff" stroke="#534AB7" stroke-width="1"/>
+  <text x="560" y="78" text-anchor="middle" font-size="13" font-weight="bold" fill="#222">Codec encoder</text>
+  <text x="560" y="97" text-anchor="middle" font-size="10" fill="#555">H.264 / H.265 frames</text>
+
+  <path d="M560 112 L560 148 L340 148 L340 184" fill="none" stroke="#888" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="460" y="142" text-anchor="middle" font-size="10" fill="#666">compressed bitstream</text>
+
+  <rect x="30" y="270" width="620" height="180" rx="12" fill="none" stroke="#ddd" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="46" y="286" font-size="11" fill="#888">Air unit / VTX</text>
+
+  <rect x="200" y="186" width="280" height="56" rx="8" fill="#e6f7f1" stroke="#1D9E75" stroke-width="1"/>
+  <text x="340" y="208" text-anchor="middle" font-size="13" font-weight="bold" fill="#222">Packetizer</text>
+  <text x="340" y="227" text-anchor="middle" font-size="10" fill="#555">Chunks into RF packets + FEC</text>
+
+  <line x1="340" y1="242" x2="340" y2="280" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="180" y="282" width="320" height="56" rx="8" fill="#e6f7f1" stroke="#1D9E75" stroke-width="1"/>
+  <text x="340" y="304" text-anchor="middle" font-size="13" font-weight="bold" fill="#222">OFDM modem</text>
+  <text x="340" y="323" text-anchor="middle" font-size="10" fill="#555">Modulates onto subcarriers</text>
+
+  <line x1="340" y1="338" x2="340" y2="376" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="200" y="378" width="280" height="56" rx="8" fill="#f3f3f3" stroke="#888" stroke-width="1"/>
+  <text x="340" y="400" text-anchor="middle" font-size="13" font-weight="bold" fill="#222">RF front-end</text>
+  <text x="340" y="419" text-anchor="middle" font-size="10" fill="#555">Amplify + transmit 5.8 GHz</text>
+
+  <line x1="340" y1="434" x2="340" y2="458" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="340" y="472" text-anchor="middle" font-size="11" fill="#666">over the air →</text>
+</svg>
